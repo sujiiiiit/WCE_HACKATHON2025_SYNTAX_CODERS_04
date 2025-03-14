@@ -1,16 +1,16 @@
+import { ThemeProvider } from "@/components/theme-provider";
+import { Providers } from "@/store/provider";
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+import { GeistSans } from "geist/font/sans";
+import { GeistMono } from "geist/font/mono";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import Header from "@/components/header/header";
+import { ProgressBar } from "@/components/ui/page-progress";
+import { Toaster } from "@/components/ui/sonner";
+import { SidebarProvider } from "@/contexts/sidebar-context";
+import { SidebarWithContext } from "@/components/sidebar/sidebar";
+import LazySidebarContent from "@/components/lazyLoad/lazyloadSidebarContent";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -19,15 +19,40 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en">
+  
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${GeistSans.className} ${GeistMono.variable} antialiased`}
       >
-        {children}
+        <ProgressBar className="page-progress">
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <Providers>
+              <TooltipProvider delayDuration={500} skipDelayDuration={500}>
+              <SidebarProvider>
+                  <SidebarWithContext>
+                    <LazySidebarContent />
+                  </SidebarWithContext>
+                <div className="h-dvh w-dvw  overflow-hidden max-w-screen-2xl m-auto">
+                  <Header />
+
+                  {children}
+                </div>
+
+                <Toaster />
+                </SidebarProvider>
+              </TooltipProvider>
+            </Providers>
+          </ThemeProvider>
+        </ProgressBar>
       </body>
     </html>
   );
