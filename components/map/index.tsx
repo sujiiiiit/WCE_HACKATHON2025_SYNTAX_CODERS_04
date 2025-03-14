@@ -81,11 +81,12 @@ const Maps = () => {
         className="h-full w-full"
         gestureHandling="greedy"
         disableDefaultUI={true}
-        restriction={{
-          latLngBounds: indiaBounds,
-          strictBounds: true
-        }}
+        // restriction={{
+        //   latLngBounds: indiaBounds,
+        //   strictBounds: true
+        // }}
       >
+        
         <AdvancedMarker position={defaultLocation} title="Your Location" />
         {/*  We are now directly manipulating google.maps.Polygon in useEffect, no need to render a <Polygon> component here */}
       </Map>
