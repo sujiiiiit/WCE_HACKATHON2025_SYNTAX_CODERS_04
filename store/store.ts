@@ -1,10 +1,11 @@
-// store/store.ts
 import { configureStore } from '@reduxjs/toolkit';
 import dialogReducer from './dialogSlice';
+import locationReducer from './locationSlice';
 
 export const store = configureStore({
   reducer: {
     dialog: dialogReducer,
+    location: locationReducer,
   },
 });
 

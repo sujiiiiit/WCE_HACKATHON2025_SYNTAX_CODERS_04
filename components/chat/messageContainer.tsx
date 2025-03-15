@@ -118,7 +118,7 @@ const MessageContainer = ({
                     </div>
                   </div>
                   <div className="mb-2 mt-1 flex items-center justify-between gap-x-1.5">
-                    <div className="flex gap-x-1.5">
+                    <div className="flex w-full gap-x-1.5">
                       <FindLocation />
                     </div>
                     <div className="flex gap-4">

@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 import { useMediaQuery } from "@react-hook/media-query";
 // import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import {useLocation} from "@/hooks/useLocation";
 
 import {
   Dialog,
@@ -31,14 +32,14 @@ import {
 
 export default function DrawerDialogDemo() {
   const isDesktop = useMediaQuery("(min-width: 768px)");
-
+ 
   if (isDesktop) {
     return (
       <Dialog>
         <Tooltip>
           <TooltipTrigger asChild>
-            <DialogTrigger>
-              <AddProject />
+            <DialogTrigger className="w-full">
+              <AddLocation />
             </DialogTrigger>
           </TooltipTrigger>
           <TooltipContent side="bottom" align="center">
@@ -89,7 +90,7 @@ export default function DrawerDialogDemo() {
   return (
     <Drawer>
       <DrawerTrigger>
-        <AddProject />
+        <AddLocation />
       </DrawerTrigger>
       <DrawerContent>
         <DrawerHeader className="px-3">
@@ -119,9 +120,15 @@ export function SearchInput({ className }: { className?: string }) {
   );
 }
 
-export function AddProject() {
+export function AddLocation() {
+  const { location, address, error, loading } = useLocation();
+  const displayLocation = address
+    ? // Take just the first part of the address (typically city/area)
+      address.display_name.split(",")[0]
+    : "Location";
+    console.log(displayLocation);
   return (
-    <label className="flex h-9 min-w-8 items-center justify-center rounded-full border p-2 pl-3 text-[13px] font-medium border-light cursor-pointer group hover:bg-accent text-color-secondary transition-all bg-transparent gap-[2px] outline-0">
+    <label className="flex w-full h-9 min-w-8 items-center justify-start  rounded-full border p-2 pl-3 text-[13px] font-medium border-light cursor-pointer group hover:bg-accent text-color-secondary transition-all bg-transparent gap-[2px] outline-0 max-w-full text-start">
       <svg
         width="24"
         height="24"
@@ -138,8 +145,8 @@ export function AddProject() {
         ></path>
       </svg>
 
-      <p className="min-w-0 text-inherit items-center pl-1 pr-1 select-none w-full max-w-24 truncate">
-        Location
+      <p className="min-w-0  text-inherit items-center pl-1 pr-1 select-none w-full max-w-full truncate">
+        {displayLocation}
       </p>
     </label>
   );
