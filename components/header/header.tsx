@@ -4,6 +4,7 @@
 // import { APIProviderContext, useMapsLibrary } from "@vis.gl/react-google-maps";
 // import PlaceAutocompleteInput from "../map/place-search";
 // import { use } from "react";
+
 function Header() {
   return (
     <div className="overflow-hidden w-full">
@@ -13,6 +14,7 @@ function Header() {
         {/* <PlaceAutocompleteInput /> */}
       {/* </APIProviderContext> */}
       {/* <ModeToggle className="absolute z-30 right-4 top-4" /> */}
+
     </div>
   );
 }
