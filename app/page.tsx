@@ -101,6 +101,7 @@ const MapComponent = () => {
       history: [],
     });
 
+    // Add the user's message to the chat history
     setChatHistory((prevHistory) => [
       ...prevHistory,
       { role: "user", content: text },
